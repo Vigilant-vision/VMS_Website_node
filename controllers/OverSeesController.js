@@ -5,7 +5,7 @@ const FormData = require('form-data');  // Import FormData package
 // Controller for handling login requests
 exports.OverseesSignin = async (req, res) => {
     const { email, password } = req.query; 
-
+console.log(email, password)
     const apiUrl = 'http://api.overseetracking.com/WebProcessorApi.ashx';
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -22,9 +22,9 @@ exports.OverseesSignin = async (req, res) => {
     });
   
     try {
-        console.log(apiUrl, body, { headers })
       // Make POST request to the external API
       const response = await axios.post(apiUrl, body, { headers });
+      console.log(response?.data)
       res.status(200).json({ success: true, data: response?.data?.Token });
     } catch (error) {
       console.error('Error occurred during login:', error.message);
